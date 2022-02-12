@@ -1,13 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Deploy') {
             steps {
-                sh 'echo "Hello World"'
-                sh '''
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                '''
+                timeout(time: 1, unit: 'MINUTES') {
+                    sh '/var/jenkins_home/scripts/fibonacci.sh 5'
+                }
+                timeout(time: 1, unit: 'MINUTES') {
+                    sh '/var/jenkins_home/scripts/fibonacci.sh 32'
+                }
             }
         }
     }
