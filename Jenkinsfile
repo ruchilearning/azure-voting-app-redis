@@ -1,14 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:9-alpine' }
+    }
     stages {
-        stage('Deploy') {
+        stage('Test'){
             steps {
-                timeout(time: 1, unit: 'MINUTES') {
-                    sh '/var/jenkins_home/scripts/fibonacci.sh 5'
-                }
-                timeout(time: 1, unit: 'MINUTES') {
-                    sh '/var/jenkins_home/scripts/fibonacci.sh 32'
-                }
+                sh 'node --version'
             }
         }
     }
